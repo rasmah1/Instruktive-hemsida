@@ -1,0 +1,260 @@
+
+
+*{
+    margin: 0;
+    font-style: none;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+body{
+    background-color: #FF8D28;
+    display: flex;
+    flex-direction: column;
+}
+
+.Head{
+   margin: auto;
+   text-align: center;
+   color: white;
+   padding: 5em;
+
+   
+   
+}
+
+.Head h1{
+    font-size: 4em;
+       text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.477);
+}
+
+.Head p{
+     margin-top: .25em;
+    font-size: 2em;
+    color: black;
+
+    
+}
+
+
+
+.group{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 1em;
+    padding: 1em;
+    
+}
+
+.card{
+    background: rgba(255, 255, 255, 0.25);
+   border-radius: 16px;
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(5px);
+   -webkit-backdrop-filter: blur(5px);
+   border: 1px solid rgba(255, 255, 255, 0.3);
+
+   color: white;
+    padding: 1.5em;
+    border-radius: 1em;
+    width: 20vw;
+    transition: 250ms ;
+    
+}
+
+.card:hover{
+    background: rgba(255, 255, 255, 0.432);
+    transform: scale(1.05);
+   
+}
+
+.card h1{
+    font-weight: 600;
+    font-size: .75em;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    
+}
+
+
+.card p{
+    font-weight: 200;
+    font-size: .65em;
+}
+
+.Courses{
+    padding: 2em;
+    margin-top: 1.5em;
+    font-size: 1.5em;
+}
+
+.Courses h2{
+    color: white;
+    font-size: 1em;
+         text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.477);
+}
+
+footer{
+    display: flex;
+    padding: .5em;
+    color: white;
+    background-color: black;
+    height: 45vh;
+}
+
+.list{
+    margin:.5em;
+    padding: .5em;
+}
+
+.list h2{
+    font-size: 1em;
+}
+
+
+.list li{
+    margin-top: 1em;
+    font-size: .9em;
+    list-style: none;
+}
+
+
+li.first{
+    margin-top: .5em;
+    font-size: 1em;
+    list-style: none;
+    font-weight: 700;
+    margin-bottom: 2em;
+}
+
+
+td
+{
+	width: 30px;
+    height: 20px;
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	border-radius:5px;
+    background:rgb(0, 0, 0);
+ 
+    
+    
+}
+
+.grid{
+	margin: 0px auto;
+    background:rgb(8, 8, 8);
+    height: 10vh;
+    width: 30vw;
+    margin-right: 10vw;
+    border-style: solid;
+    border-color: #ffc08a;
+    border-radius: 5px;
+    border-width: .25em;
+   
+    
+}
+
+.btnStart{
+    margin-top: 1em;
+    width: 20vw;
+    padding: .5em;
+    
+    cursor: pointer;
+    margin-left: -100px;
+    text-align: center;
+    box-sizing: border-box;
+    
+  
+}
+
+.btnRestart
+{
+	background-color: #8247c2;
+	display: none;
+    
+    margin-top: 50px;
+}
+
+.btnSnake
+{
+   
+    margin-bottom: 10px;
+	border-radius: 10px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .25em;
+    background-color: #ffffff;
+    transition: .25s;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font: size 1em;;
+    margin-top: 5px;
+    
+}
+
+.btnSnake:hover{
+    background-color:#e7e7e7 ;
+}
+
+
+.score-header
+{
+  
+  color:white;
+  font-weight: 600;
+  margin: 0px auto;
+  width: 30vw;
+  margin-right: 10vw;
+  margin-bottom: 2.5vh;
+
+  
+  
+}
+
+.Section1{
+    display: flex;
+}
+
+.game{
+
+
+background: rgba(255, 255, 255, 0.25);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+
+width: 30vw;
+height: 60vh;
+margin-top: 15vh;
+margin-right: 5vw; 
+padding: 30px;
+}
+
+.Coursbtn{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5vh;
+
+    width: max-content;
+    padding: 2em;
+}
+
+.Coursbtn button{
+   padding: .75em;
+   border: none;
+   background-color: white;
+   font-size: 1.5em;
+   font-weight: 550;
+   border-radius: .75em;
+   transition: 250ms;
+}
+
+.Coursbtn button:hover{
+    transform: scale(1.05);
+}

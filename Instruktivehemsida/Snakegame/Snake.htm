@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Snake.css">
+</head>
+<body>
+    
+</body>
+</html>
+
+<h1>Snake Game in JavaScript</h1>
+
+<p class='description'>
+  Learn how to code the classic Snake game in JavaScript with this detailed tutorial. Step-by-step instructions and code examples will guide you through building your own interactive game.
+  For the full walkthrough implementation, check out the complete blog post over on <a href='https://www.thatsoftwaredude.com/content/6193/coding-the-snake-game-in-javascript' target='_blank'>thatsoftwaredude.com</a>.
+</p>
+
+<div onclick="startCountdown()" class="btnStart btnSnake" id="btnStart">Start</div>
+<div onclick="restart()" id="btnRestart" class="btnRestart btnSnake">try again</div>
+
+<div class="score-header">
+  Score: <span id="score" class="score"></span>
+</div>
+<table id="grid" class="grid"></table>
+
+<script src="Snake.js"></script>

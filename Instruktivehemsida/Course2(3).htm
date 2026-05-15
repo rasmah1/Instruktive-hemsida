@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course1</title>
+
+            <title>code-input: Basic Prism.js Code Editor</title>
+        <!--For convenience, this demo uses files from JSDelivr CDN; for more privacy and security download and host them yourself.-->
+
+        <!--1. Import highlighter-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30/themes/prism.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/components/prism-core.min.js" data-manual></script><!--Remove data-manual if also using Prism normally-->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/plugins/autoloader/prism-autoloader.min.js"></script>
+        <!--2. Import code-input-js-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/plugins/indent.min.js"></script>
+        <!--3. Join code-input-js to highlighter-->
+        <script>codeInput.registerTemplate("syntax-highlighted", new codeInput.templates.Prism(Prism, [new codeInput.plugins.Indent()]));</script>
+        <link rel="stylesheet" href="Course1.css">
+</head>
+
+<header>
+    <a href="Courses.htm">⬅ Back to Courses</a>
+    <h1>Course2: Javascript Snake game</h1>
+    <p>Lesson 3 of 4</p>
+</header>
+
+    <body>
+
+<div class="Info">
+    <h1>How to create the Grid</h1>
+    <p>Learn to create the grid that the game will be played on</p>
+</div>
+
+
+
+
+<div class="Learnings">
+    <h1>What you will learn</h1>
+    <p>In this section you will learn to create a timer and start the game by pressing the button</p>
+
+   
+
+
+  <img src="Bilder/Codesnippet2.png" alt="Code snippet">
+   <p>These are the functions that will help create the timer/start button. The startCountdown function will create a short timer from when you press the start button and when the game starts so that you can actually react to the game. The Start function will be loading in alot of other functions and will become crucial later on when we add stuff like movement and etc.</p>
+  </div>
+ </div>
+ 
+</div>
+
+        <!-- code-input element -->
+
+        <h1>Put what you learnt to use!</h1>
+        <p>Here we have set up some variables and built our own html base. Try changin the variables to change the html base and learn about dom</p>
+        <code-input language="JavaScript" id="js-box"><textarea data-code-input-fallback>
+
+var size = 16;          
+var theblock;           
+var timer;              // Controls game speed
+var direction = "up";   // Initial direction
+var inprogress = false; // Is the game running?
+var score = 0;          // Player score
+var blocks = [];        // Snake body segments
+
+function drawGrid() {
+    var gridElement = document.getElementById("grid");
+    gridElement.innerHTML = ""; 
+
+    for (var i = 0; i < size; i++) {
+        // FIXED: You must create the row (tr) before adding cells to it
+        var row = document.createElement("tr");
+
+        for (var x = 0; x < size; x++) {
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+        }
+        gridElement.appendChild(row);
+    }
+}
+
+function createBlock() {
+    // FIXED: Added the x and y coordinates
+    theblock = { x: size / 2, y: size / 2 };
+    drawBlock();
+}
+
+function drawBlock() {
+    var parent = document.getElementById("grid");
+    // This only works if theblock has x and y defined!
+    if (theblock.x !== undefined && theblock.y !== undefined) {
+        parent.rows[theblock.y].cells[theblock.x].style.backgroundColor = "orange";
+    }
+}
+
+//change the start number to 2000
+
+function startCountdown()
+{
+    document.getElementById("btnStart").innerHTML = "Get ready...";
+    setTimeout(function(){
+        if (inprogress==false)
+            start();
+    }, 0);
+}
+
+//there are a couple functions missing from the start(), try finding these and then adding them
+
+function start()
+{
+    document.getElementById("score").innerHTML = "";
+    document.getElementById("btnStart").style.display = "none";
+    blocks = new Array();
+    load();
+    addBlock();
+    document.onkeydown = checkKey;
+    timer = setInterval(function(){move();}, 100);
+    inprogress=true;
+}
+
+// Now these will work!
+drawGrid();
+createBlock();
+        </textarea></code-input>
+
+<div class="button">
+<button onclick="runCode()">Run Code</button>
+<button id="Nxt"><a href="Course2(4).htm" >Next page</a></button>
+<button ><a href="Course2(2).htm" >Last page</a></button>
+</div>
+
+<p id="Feedback"></p>
+<div class="preview-container">
+    <h2>Output</h2>
+    <iframe id="preview"></iframe>
+</div>
+
+<script src="Livepreview2.js"></script>
+
+
+<script>
+function checkAnswer() {
+    const feedback = document.getElementById("Feedback");
+    const nextbutton = document.getElementById("Nxt");
+    const previewFrame = document.getElementById("preview");
+    const frameDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+
+    //Get the Code Text
+    const studentCode = document.querySelector("#js-box textarea").value;
+
+    //Timeout Check (Ensures they changed 0 to 2000)
+    const hasCorrectTimeout = studentCode.includes("}, 2000)");
+
+    //Start Function Check (Peek inside the start function)
+    // This regex looks for 'start' followed by any code that includes load() and addBlock()
+    const startContent = studentCode.match(/function start\s*\(\)\s*\{([\s\S]*?)\}/);
+    const startInnerJs = startContent ? startContent[1] : "";
+    
+    const hasAddedLoad = startInnerJs.includes("load();");
+    const hasAddedAddBlock = startInnerJs.includes("addBlock();");
+
+    //Check if the Grid is rendered
+    const rowCount = frameDoc.querySelectorAll("tr").length;
+    const orangeCell = Array.from(frameDoc.querySelectorAll("td")).find(td => 
+        td.style.backgroundColor === "orange" || td.style.backgroundColor === "rgb(255, 165, 0)"
+    );
+
+    //DEBUGGER EVALUATION
+
+    if (rowCount >= 16 && orangeCell && hasCorrectTimeout && hasAddedLoad && hasAddedAddBlock) {
+        feedback.innerHTML = "Debugger: Pass! Start function is fully assembled.";
+        feedback.style.color = "green";
+        feedback.style.fontWeight = "800";
+        nextbutton.style.display = "flex";
+    } else {
+        nextbutton.style.display = "none";
+        feedback.style.color = "#FF8D28";
+        feedback.style.fontWeight = "800";
+
+        if (!hasCorrectTimeout) {
+            feedback.innerHTML = "Debugger: Countdown is still too fast. Did you change 0 to 2000?";
+        } else if (!hasAddedLoad || !hasAddedAddBlock) {
+            feedback.innerHTML = "Debugger: Almost there! You still need to add load(); and addBlock(); inside your start() function.";
+        } else if (rowCount < 16) {
+            feedback.innerHTML = "Debugger: Grid missing. Keep drawGrid() at the bottom!";
+        }
+    }
+}
+</script>
+
+</html>

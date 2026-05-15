@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course1</title>
+
+            <title>code-input: Basic Prism.js Code Editor</title>
+        <!--For convenience, this demo uses files from JSDelivr CDN; for more privacy and security download and host them yourself.-->
+
+        <!--1. Import highlighter-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30/themes/prism.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/components/prism-core.min.js" data-manual></script><!--Remove data-manual if also using Prism normally-->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/plugins/autoloader/prism-autoloader.min.js"></script>
+        <!--2. Import code-input-js-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/plugins/indent.min.js"></script>
+        <!--3. Join code-input-js to highlighter-->
+        <script>codeInput.registerTemplate("syntax-highlighted", new codeInput.templates.Prism(Prism, [new codeInput.plugins.Indent()]));</script>
+        <link rel="stylesheet" href="Course1.css">
+</head>
+
+<header>
+    <a href="Courses.htm">⬅ Back to Courses</a>
+    <h1>Course3: Javascript Snake game</h1>
+    <p>Lesson 1 of 4</p>
+</header>
+
+    <body>
+
+<div class="Info">
+    <h1>How to add fruits and appending to the game</h1>
+    <p>Learn how to add the fruits and apending functions to the game, once youve completed that then you will be very clode to having completed the full game</p>
+</div>
+
+
+
+
+<div class="Learnings">
+    <h1>What you will learn</h1>
+    <p>In this section you will learn to add the fruit and the appending to the game, this will allow the user to eat a fruit in order to grow larger and will make the game actually playable.</p>
+
+   <img src="Bilder/Codesnippet6.png" alt="Code snippet">
+   <p>This is the function that randomly creates a fruit for the user to then eat, it also checks for collison the see if the fruit is making contact with the snake so that it can call upon the append function.</p>
+   <img src="Bilder/Codesnippet7.png" alt="Code snippet">
+   <img src="Bilder/Codesnippet8.png" alt="Code snippet">
+
+   <p>This is the function that appends blocks to the snake whenever the user eats a fruit. it uses the switch conditions to accomplish this</p>
+  </div>
+ </div>
+ 
+</div>
+
+        <!-- code-input element -->
+
+        <h1>Put what you learnt to use!</h1>
+        <p>Here we have set up some variables and built our own html base. Try changin the variables to change the html base and learn about dom</p>
+        <code-input language="JavaScript" id="js-box"><textarea data-code-input-fallback>
+let size = 16;
+let timer;
+let direction = "up";
+let theblock;
+let blocks = new Array();
+let segment;
+let score = 0;
+let locked = false;
+let inprogress = false;
+
+function d(id) {
+    let el = document.getElementById(id);
+    return el;
+}
+
+function drawGrid() {
+    document.getElementById("grid").innerHTML = "";
+
+    for (let i = 0; i < size; i++) {
+        let row = document.createElement("tr");
+
+        for (let x = 0; x < size; x++) {
+            let cell = document.createElement("td");
+            row.appendChild(cell);
+        }
+        document.getElementById("grid").appendChild(row);
+    }
+}
+
+function createBlock() {
+    theblock = { x: size / 2, y: size / 2, dir: direction };
+    drawBlock();
+}
+
+function drawBlock() {
+    var parent = document.getElementById("grid");
+    parent.rows[theblock.y].cells[theblock.x].style.backgroundColor = "orange";
+}
+
+function startCountdown() {
+    document.getElementById("btnStart").innerHTML = "Get ready...";
+    setTimeout(function() {
+        if (inprogress == false)
+            start();
+    }, 2000);
+}
+
+function start() {
+    document.getElementById("score").innerHTML = "";
+    document.getElementById("btnStart").style.display = "none";
+    blocks = new Array();
+    load();
+    addBlock();
+    document.onkeydown = checkKey;
+    timer = setInterval(function() { move(); }, 100);
+    inprogress = true;
+}
+
+function move() {
+    locked = true;
+    clearBlock(theblock);
+    var directionChange = false;
+    var directionChangeValue;
+
+    if (theblock.dir != direction) {
+        directionChangeValue = { x: theblock.x, y: theblock.y, direction };
+        directionChange = true;
+        theblock.dir = direction;
+    }
+
+    switch (direction) {
+        case "up":
+            theblock.y--;
+            break;
+        case "down":
+            theblock.y++;
+            break;
+        case "left":
+            theblock.x--;
+            break;
+        case "right":
+            theblock.x++;
+            break;
+    }
+
+    if (theblock.x < 0 || theblock.y < 0 || theblock.x >= size || theblock.y >= size || collision(theblock.x, theblock.y)) {
+        inprogress = false;
+        document.getElementById("score").innerHTML = blocks.length;
+        document.getElementById("btnRestart").style.display = "block";
+        clearInterval(timer);
+    } else {
+        drawBlock();
+        moveBody();
+        checkBlock();
+    }
+
+    if (directionChange)
+        addDirections(directionChangeValue);
+
+    locked = false;
+}
+
+function moveBody() {
+    var parent = document.getElementById("grid");
+
+    for (var i = 0; i < blocks.length; i++) {
+        parent.rows[blocks[i].y].cells[blocks[i].x].style.backgroundColor = "black";
+        blocks[i].dir = getDirection(blocks[i]);
+
+        switch (blocks[i].dir) {
+            case "up":
+                blocks[i].y--;
+                break;
+            case "down":
+                blocks[i].y++;
+                break;
+            case "left":
+                blocks[i].x--;
+                break;
+            case "right":
+                blocks[i].x++;
+                break;
+        }
+
+        parent.rows[blocks[i].y].cells[blocks[i].x].style.backgroundColor = "orange";
+    }
+}
+
+function collision(x, y) {
+    for (var i = 0; i < blocks.length; i++) {
+        if (x == blocks[i].x && y == blocks[i].y)
+            return true;
+    }
+    return false;
+}
+
+function getDirection(blockParam) {
+    for (var i = 0; i < blockParam.dirs.length; i++) {
+        if (blockParam.x == blockParam.dirs[i].x && blockParam.y == blockParam.dirs[i].y) {
+            var direction1 = blockParam.dirs[i].direction;
+            blockParam.dirs.splice(i, 1);
+            return direction1;
+        }
+    }
+    return blockParam.dir;
+}
+
+function addDirections(directionParam) {
+    for (var i = 0; i < blocks.length; i++) {
+        var dirs = blocks[i].dirs;
+
+        if (typeof dirs !== 'undefined') {
+            dirs.push(directionParam);
+            blocks[i].dirs = dirs;
+        } else {
+            var dirs = new Array();
+            dirs.push(directionParam);
+            blocks[i].dir = dirs;
+        }
+    }
+}
+
+function clearBlock(blockParam) {
+    var parent = document.getElementById("grid");
+    parent.rows[blockParam.y].cells[blockParam.x].style.backgroundColor = "black";
+}
+
+function checkKey(e) {
+    if (inprogress)
+        e.preventDefault();
+
+    if (locked == true)
+        return;
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        if (blocks.length == 0 || (blocks.length > 0 && direction != "down"))
+            direction = "up";
+    } else if (e.keyCode == '40') {
+        if (blocks.length == 0 || (blocks.length > 0 && direction != "up"))
+            direction = "down";
+    } else if (e.keyCode == '37') {
+        if (blocks.length == 0 || (blocks.length > 0 && direction != "right"))
+            direction = "left";
+    } else if (e.keyCode == '39') {
+        if (blocks.length == 0 || (blocks.length > 0 && direction != "left"))
+            direction = "right";
+    }
+}
+
+function checkBlock() {
+    if (theblock.x == segment.x && theblock.y == segment.y) {
+        score++;
+        appendBlock();
+        addBlock();
+        document.getElementById('score').innerHTML = score;
+    }
+}
+
+//Append a block to the body each time the user eats a fruit
+function appendBlock() {
+    //there are some missing variables here, add them to the function
+
+    if (blocks.length == 0) {
+        switch (direction) {
+            case "up":
+                b = { x: theblock.x, y: theblock.y + 1, dir: direction, dirs: dirsParam };
+                break;
+            case "down":
+                b = { x: theblock.x, y: theblock.y - 1, dir: direction, dirs: dirsParam };
+                break;
+            case "left":
+                b = { x: theblock.x + 1, y: theblock.y, dir: direction, dirs: dirsParam };
+                break;
+            case "right":
+                b = { x: theblock.x - 1, y: theblock.y, dir: direction, dirs: dirsParam };
+                break;
+        }
+        blocks.push(b);
+    } else {
+        switch (blocks[blocks.length - 1].dir) {
+            case "up":
+                b = { x: blocks[blocks.length - 1].x, y: blocks[blocks.length - 1].y + 1, dir: blocks[blocks.length - 1].dir, dirs: copyArray(blocks[blocks.length - 1].dirs) };
+                break;
+            case "down":
+                b = { x: blocks[blocks.length - 1].x, y: blocks[blocks.length - 1].y - 1, dir: blocks[blocks.length - 1].dir, dirs: copyArray(blocks[blocks.length - 1].dirs) };
+                break;
+            case "left":
+                b = { x: blocks[blocks.length - 1].x + 1, y: blocks[blocks.length - 1].y, dir: blocks[blocks.length - 1].dir, dirs: copyArray(blocks[blocks.length - 1].dirs) };
+                break;
+            case "right":
+                b = { x: blocks[blocks.length - 1].x - 1, y: blocks[blocks.length - 1].y, dir: blocks[blocks.length - 1].dir, dirs: copyArray(blocks[blocks.length - 1].dirs) };
+                break;
+        }
+        blocks.push(b);
+    }
+    document.getElementById("grid").rows[b.y].cells[b.x].style.backgroundColor = "purple";
+}
+
+// the function that creats a fruit randomly
+function addBlock() {
+   // there are some missing variables here, find them and add them to the code.
+
+    while (done == false) {
+        x2 = Math.floor((Math.random() * size));
+        y2 = Math.floor((Math.random() * size));
+
+        if (collision(x2, y2) == false && (theblock.x != x2 && theblock.y != y2))
+            done = true;
+    }
+
+    segment = { x: x2, y: y2 };
+    var parent = document.getElementById("grid");
+    parent.rows[y2].cells[x2].style.backgroundColor = "red";
+}
+
+function load() {
+    drawGrid();
+    createBlock();
+}
+
+function copyArray(arrayParam) {
+    var array = new Array();
+    for (var i = 0; i < arrayParam.length; i++) {
+        array.push(arrayParam[i]);
+    }
+    return array;
+}
+
+window.addEventListener('load', function() {
+    load();
+});
+        </textarea></code-input>
+
+<div class="button">
+<button onclick="runCode()">Run Code</button>
+<button id="Nxt"><a href="Courses.htm" >Next page</a></button>
+</div>
+
+<p id="Feedback"></p>
+<div class="preview-container">
+    <h2>Output</h2>
+    <iframe id="preview"></iframe>
+</div>
+
+<script src="Livepreview2.js"></script>
+
+
+<script>
+function checkAnswer() {
+    const feedback = document.getElementById("Feedback");
+    const nextbutton = document.getElementById("Nxt");
+    
+    // Get the actual text from the editor
+    const studentCode = document.querySelector("#js-box textarea").value;
+
+    // 1. Check for missing variables in appendBlock()
+    const hasB = studentCode.match(/function appendBlock\s*\(\)\s*\{[\s\S]*?var b;/);
+    const hasDirsParam = studentCode.includes("var dirsParam = new Array();");
+
+    // 2. Check for missing variables in addBlock()
+    const hasX2 = studentCode.match(/function addBlock\s*\(\)\s*\{[\s\S]*?var x2;/);
+    const hasY2 = studentCode.match(/function addBlock\s*\(\)\s*\{[\s\S]*?var y2;/);
+    const hasDone = studentCode.match(/function addBlock\s*\(\)\s*\{[\s\S]*?var done = false;/);
+
+    // --- DEBUGGER EVALUATION ---
+
+    if (hasB && hasDirsParam && hasX2 && hasY2 && hasDone) {
+        
+        feedback.innerHTML = "Debugger: Pass! You successfully identified and declared the missing variables. The snake can now grow and spawn fruit!";
+        feedback.style.color = "green";
+        feedback.style.fontWeight = "800";
+        nextbutton.style.display = "flex";
+        
+    } else {
+        nextbutton.style.display = "none";
+        feedback.style.color = "#FF8D28";
+        feedback.style.fontWeight = "800";
+
+        if (!hasB || !hasDirsParam) {
+            feedback.innerHTML = "Debugger: Check your appendBlock() function. Did you declare 'b' and 'dirsParam'?";
+        } else if (!hasX2 || !hasY2 || !hasDone) {
+            feedback.innerHTML = "Debugger: Check your addBlock() function. It's missing 'x2', 'y2', or the 'done' boolean!";
+        }
+    }
+}
+
+
+const runBtn = document.querySelector("button[onclick='runCode()']");
+runBtn.addEventListener('click', () => {
+    setTimeout(checkAnswer, 500);
+});
+</script>
+
+</html>

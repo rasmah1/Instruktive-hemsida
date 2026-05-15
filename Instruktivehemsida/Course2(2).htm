@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course1</title>
+
+            <title>code-input: Basic Prism.js Code Editor</title>
+        <!--For convenience, this demo uses files from JSDelivr CDN; for more privacy and security download and host them yourself.-->
+
+        <!--1. Import highlighter-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30/themes/prism.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/components/prism-core.min.js" data-manual></script><!--Remove data-manual if also using Prism normally-->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/plugins/autoloader/prism-autoloader.min.js"></script>
+        <!--2. Import code-input-js-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/plugins/indent.min.js"></script>
+        <!--3. Join code-input-js to highlighter-->
+        <script>codeInput.registerTemplate("syntax-highlighted", new codeInput.templates.Prism(Prism, [new codeInput.plugins.Indent()]));</script>
+        <link rel="stylesheet" href="Course1.css">
+</head>
+
+<header>
+    <a href="Courses.htm">⬅ Back to Courses</a>
+    <h1>Course2: Javascript Snake game</h1>
+    <p>Lesson 2 of 4</p>
+</header>
+
+    <body>
+
+<div class="Info">
+    <h1>How to create the Grid</h1>
+    <p>Learn to create the grid that the game will be played on</p>
+</div>
+
+
+
+
+<div class="Learnings">
+    <h1>What you will learn</h1>
+    <p>In this section you will learn to create a functional grid using javascript, there is already a html and css base implemented within the backend of this website so all that you will have to focus on is creating the grid via javascript.</p>
+
+   
+
+
+  <img src="Bilder/Codesnippet1.png" alt="Code snippet">
+   <p>These are the functions that will help create the grid. The drawgrid function is what manipulates the dom and makes it so that the grid is created and can be used later on in the project. After that is the create block function which finds the center of the grid to later on call upon the drawblock function. The draw block will create a different colored block in the middle of the grid that shall later be the snake character that you are controlling. Now you will have to semi rebuild this code in the console below in order to fully understand it</p>
+  </div>
+ </div>
+ 
+</div>
+
+        <!-- code-input element -->
+
+        <h1>Put what you learnt to use!</h1>
+        <p>Here we have set up some variables and built our own html base. Try changin the variables to change the html base and learn about dom</p>
+        <code-input language="JavaScript" id="js-box"><textarea data-code-input-fallback>
+//add the number 16 to tne size
+let size = 0;
+
+// This will hold the snake's head coordinates
+let theblock;
+
+// Function to build the HTML table grid
+function drawGrid() {
+    var gridElement = document.getElementById("grid");
+    gridElement.innerHTML = ""; // Clear existing grid
+
+//there is an important variable missing from this function, find it and recreate it.
+ for (var i = 0; i < size; i++) {
+
+        for (var x = 0; x < size; x++) {
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+        }
+        gridElement.appendChild(row);
+    }
+}
+
+function createBlock() {
+    // Define the center of the grid in the variable below
+    theblock = { };
+    drawBlock();
+}
+
+// Creates the snake on the grid
+function drawBlock() {
+    var parent = document.getElementById("grid");
+    // Find the specific row and cell using the x,y coordinates
+    parent.rows[theblock.y].cells[theblock.x].style.backgroundColor = "orange";
+}
+
+// Runs both functions
+drawGrid();
+createBlock();
+        </textarea></code-input>
+
+<div class="button">
+<button onclick="runCode()">Run Code</button>
+<button id="Nxt"><a href="Course2(3).htm" >Next page</a></button>
+<button ><a href="Course2.htm" >Last page</a></button>
+</div>
+
+<p id="Feedback"></p>
+<div class="preview-container">
+    <h2>Output</h2>
+    <iframe id="preview"></iframe>
+</div>
+
+<script src="Livepreview2.js"></script>
+
+
+<script>
+function checkAnswer() {
+    const feedback = document.getElementById("Feedback");
+    const nextbutton = document.getElementById("Nxt");
+    const previewFrame = document.getElementById("preview");
+    
+    // Access the content inside the iframe
+    const frameDoc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+    
+    // 1. Check if the grid has rows (did they fix 'size' and 'row'?)
+    const rowCount = frameDoc.querySelectorAll("tr").length;
+    
+    // 2. Check if there is an orange cell (did they fix 'theblock'?)
+    const cells = frameDoc.querySelectorAll("td");
+    let hasSnake = false;
+    
+    cells.forEach(td => {
+        // We check for both the name "orange" and the RGB value to be safe across browsers
+        if (td.style.backgroundColor === "orange" || td.style.backgroundColor === "rgb(255, 165, 0)") {
+            hasSnake = true;
+        }
+    });
+
+    if (rowCount >= 16 && hasSnake) {
+        feedback.innerHTML = "Good job! The grid is created and the snake is ready.";
+        feedback.style.color = "green";
+        feedback.style.fontWeight = "800";
+        nextbutton.style.display = "flex";
+    } else {
+        nextbutton.style.display = "none";
+        feedback.style.color = "#FF8D28";
+        feedback.style.fontWeight = "800";
+        
+        if (rowCount < 16) {
+            feedback.innerHTML = "Keep going! Make sure your size is 16 and you are creating rows.";
+        } else if (!hasSnake) {
+            feedback.innerHTML = "Grid looks good! Now define the x and y for 'theblock' to see the snake.";
+        }
+    }
+}
+</script>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course1</title>
+
+            <title>code-input: Basic Prism.js Code Editor</title>
+        <!--For convenience, this demo uses files from JSDelivr CDN; for more privacy and security download and host them yourself.-->
+
+        <!--1. Import highlighter-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30/themes/prism.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/components/prism-core.min.js" data-manual></script><!--Remove data-manual if also using Prism normally-->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/plugins/autoloader/prism-autoloader.min.js"></script>
+        <!--2. Import code-input-js-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/plugins/indent.min.js"></script>
+        <!--3. Join code-input-js to highlighter-->
+        <script>codeInput.registerTemplate("syntax-highlighted", new codeInput.templates.Prism(Prism, [new codeInput.plugins.Indent()]));</script>
+        <link rel="stylesheet" href="Course1.css">
+</head>
+
+<header>
+    <a href="Courses.htm">⬅ Back to Courses</a>
+    <h1>Course2: Javascript Snake game</h1>
+    <p>Lesson 4 of 4</p>
+</header>
+
+    <body>
+
+<div class="Info">
+    <h1>How to add the movement to the game</h1>
+    <p>Learn how to add the movement and key detection to the game</p>
+</div>
+
+
+
+
+<div class="Learnings">
+    <h1>What you will learn</h1>
+    <p>In this section you will learn to add basci movement and key functions in order to start making the game playable</p>
+
+   <img src="Bilder/Codesnippet4.png" alt="Code snippet">
+   <img src="Bilder/Codesnippet5.png" alt="Code snippet">
+   <p>This is the function that controls the movement itself, it uses a basic switch statement which works like a if else statement. it uses this statement to create simple horizontal and vertical movement and also adds a game over whitin the end of the function</p>
+
+   <img src="Bilder/Codesnippet3.png" alt="Code snippet">
+
+   This is the function that bind the keys to the game and actual allows you to move your character by pressing certain key inputs.
+  </div>
+ </div>
+ 
+</div>
+
+        <!-- code-input element -->
+
+        <h1>Put what you learnt to use!</h1>
+        <p>Here we have set up some variables and built our own html base. Try changin the variables to change the html base and learn about dom</p>
+        <code-input language="JavaScript" id="js-box"><textarea data-code-input-fallback>
+var size = 16;          
+var theblock;           
+var timer;              
+var direction = "up";   
+var inprogress = false; 
+
+
+function drawGrid() {
+    var gridElement = document.getElementById("grid");
+    gridElement.innerHTML = ""; 
+    for (var i = 0; i < size; i++) {
+        var row = document.createElement("tr");
+        for (var x = 0; x < size; x++) {
+            var cell = document.createElement("td");
+            row.appendChild(cell);
+        }
+        gridElement.appendChild(row);
+    }
+}
+
+function createBlock() {
+    theblock = { x: Math.floor(size / 2), y: Math.floor(size / 2) };
+    drawBlock();
+}
+
+function drawBlock() {
+    var parent = document.getElementById("grid");
+    parent.rows[theblock.y].cells[theblock.x].style.backgroundColor = "orange";
+}
+
+function clearBlock() {
+    var parent = document.getElementById("grid");
+    parent.rows[theblock.y].cells[theblock.x].style.backgroundColor = "black";
+}
+
+The movement function
+function move() {
+    clearBlock(); 
+
+    // Update coordinates based on the current direction
+    switch(direction) {
+        case "up":
+            theblock.y--;
+            break;
+        case "down":
+            theblock.y++;
+            break;
+        case "left":
+            theblock.x--;
+            break;
+        case "right":
+            theblock.x++;
+            break;
+    }
+
+    // lose if in contact with wall
+    if (theblock.x < 0 || theblock.y < 0 || theblock.x >= size || theblock.y >= size) {
+        clearInterval(timer);
+        inprogress = false;
+    } else {
+        drawBlock();
+    }
+}
+
+// keychecking function
+function checkKey(e) {
+    e = e || window.event;
+
+    if (e.keyCode == '38') { // up arrow
+        direction = "up";
+    }
+    else if (e.keyCode == '40') { // down arrow
+        direction = "down";
+    }
+    else if (e.keyCode == '37') { // left arrow
+        direction = "left";
+    }
+    else if (e.keyCode == '39') { // right arrow
+        direction = "right";
+    }
+}
+
+// Connect to keyboard
+document.onkeydown = checkKey;
+
+
+function start() {
+    document.getElementById("btnStart").style.display = "none";
+    inprogress = true;
+
+    drawGrid();
+    createBlock();
+    
+    timer = setInterval(function(){ move(); }, 100);
+}
+
+function startCountdown() {
+    if (inprogress) return;
+    document.getElementById("btnStart").innerHTML = "Get ready...";
+    setTimeout(start, 2000);
+}
+
+
+drawGrid();
+createBlock();
+        </textarea></code-input>
+
+<div class="button">
+<button onclick="runCode()">Run Code</button>
+<button id="Nxt"><a href="Courses.htm" >Next page</a></button>
+<button ><a href="Course2(3).htm" >Last page</a></button>
+</div>
+
+<p id="Feedback"></p>
+<div class="preview-container">
+    <h2>Output</h2>
+    <iframe id="preview"></iframe>
+</div>
+
+<script src="Livepreview2.js"></script>
+
+
+<script>
+function checkAnswer() {
+    const feedback = document.getElementById("Feedback");
+    const nextbutton = document.getElementById("Nxt");
+    const previewFrame = document.getElementById("preview");
+    
+    // Get the actual text from the editor
+    const studentCode = document.querySelector("#js-box textarea").value;
+
+    // 1. Check for Arrow Key Codes (37, 38, 39, 40)
+    const hasUpKey = studentCode.includes("'38'");
+    const hasDownKey = studentCode.includes("'40'");
+    const hasLeftKey = studentCode.includes("'37'");
+    const hasRightKey = studentCode.includes("'39'");
+
+    // 2. Check for Coordinate Math (y--, y++, x--, x++)
+    const hasUpMove = studentCode.includes("theblock.y--");
+    const hasDownMove = studentCode.includes("theblock.y++");
+    const hasLeftMove = studentCode.includes("theblock.x--");
+    const hasRightMove = studentCode.includes("theblock.x++");
+
+    // 3. Check for document binding
+    const hasKeyListener = studentCode.includes("document.onkeydown = checkKey;");
+
+    // --- DEBUGGER EVALUATION ---
+
+    if (hasUpKey && hasDownKey && hasLeftKey && hasRightKey && 
+        hasUpMove && hasDownMove && hasLeftMove && hasRightMove && hasKeyListener) {
+        
+        feedback.innerHTML = "Debugger: Pass! The snake is alive and the controls are working!";
+        feedback.style.color = "green";
+        feedback.style.fontWeight = "800";
+        nextbutton.style.display = "flex";
+        
+    } else {
+        nextbutton.style.display = "none";
+        feedback.style.color = "#FF8D28";
+        feedback.style.fontWeight = "800";
+
+        if (!hasUpMove || !hasDownMove) {
+            feedback.innerHTML = "Debugger: The snake doesn't know how to move yet! Fix the y and x values in the move function.";
+        } else if (!hasUpKey || !hasDownKey) {
+            feedback.innerHTML = "Debugger: The keycodes are empty! Hint: Up is 38, Down is 40.";
+        } else if (!hasKeyListener) {
+            feedback.innerHTML = "Debugger: You haven't connected the keyboard! Add: document.onkeydown = checkKey;";
+        }
+    }
+}
+</script>
+
+</html>

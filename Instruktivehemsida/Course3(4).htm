@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course1</title>
+
+            <title>code-input: Basic Prism.js Code Editor</title>
+        <!--For convenience, this demo uses files from JSDelivr CDN; for more privacy and security download and host them yourself.-->
+
+        <!--1. Import highlighter-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30/themes/prism.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/components/prism-core.min.js" data-manual></script><!--Remove data-manual if also using Prism normally-->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/plugins/autoloader/prism-autoloader.min.js"></script>
+        <!--2. Import code-input-js-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/plugins/indent.min.js"></script>
+        <!--3. Join code-input-js to highlighter-->
+        <script>codeInput.registerTemplate("syntax-highlighted", new codeInput.templates.Prism(Prism, [new codeInput.plugins.Indent()]));</script>
+        <link rel="stylesheet" href="Course1.css">
+</head>
+
+<header>
+    <a href="Courses.htm">⬅ Back to Courses</a>
+    <h1>Course3: Javascript Snake game</h1>
+    <p>Lesson 4 of 4</p>
+</header>
+
+    <body>
+
+<div class="Info">
+    <h1>What have you learned?</h1>
+    <p>By completing this course you have now mastered the fundementals of javascript and have also learned how to create your very own game using these fundementals.</p>
+</div>
+
+
+
+
+<div class="Learnings">
+    <h1>What to do now?</h1>
+    <p>Learning JavaScript through this snake game builds a foundational understanding of logic and problem-solving that translates to almost any tech career. By mastering DOM manipulation, arrays, and game loops, you are essentially learning how to bridge the gap between static code and dynamic user experiences. These concepts are the bedrock of modern web development and software engineering. In the future, this "game logic" mindset will help you tackle complex UI interactions, handle real-time data, and adapt to powerful frameworks like React or Vue with confidence and ease.</p>
+
+      <img src="Bilder/Finale.png" alt="Future options">
+
+ </div>
+ 
+</div>
+
+<div class="button">
+<button><a href="Courses.htm" >Next page</a></button>
+<button ><a href="Course3(3).htm" >Last page</a></button>
+</div>
+
+</body>
+
+
+</html>

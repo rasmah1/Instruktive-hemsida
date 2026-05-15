@@ -1,0 +1,245 @@
+*{
+    margin: 0;
+    font-style: none;
+  font-family: "Roboto Condensed", sans-serif;
+  list-style: none;
+  text-decoration: none;
+}
+
+body{
+    background-color: #FF8D28;
+    display: flex;
+    flex-direction: column;
+}
+
+.back{
+    color: white;
+    text-decoration: none;
+    font-size: 1.4rem;
+       margin-left: 2.5%;
+    margin-top: 2.5%;
+}
+
+.Head{
+   margin: auto;
+   text-align: center;
+   color: white;
+   padding: 5em;
+}
+
+.Head h1{
+    font-size: 4em;
+       text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.477);
+}
+
+.Head p{
+    margin-top: .25em;
+    font-size: 2em;
+    color: black;
+
+    
+}
+
+.group{
+    display: grid;
+    grid-template-columns: 1 1 auto;
+    grid-gap: 1em;
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.card{
+
+   color: #000000;
+    padding: 1.5em;
+    border-radius: 1em;
+    width: 85vw;
+    transition: 250ms ;
+    
+    display: flex;
+    background: linear-gradient(to right, #FF8D28 0%, #FF8D28 30%, white 0%, white 70%);
+        
+    padding: 2.5%;
+    box-shadow: 0px 0px 10px 0px black;
+    border-radius: 10px;
+    
+    transition: 250ms;
+}
+
+.card:hover{
+ transform: scale(1.05);
+}
+
+.text{
+  
+    width: 70%;
+    margin-left: auto;
+}
+
+.text h1{
+    font-size: 2.2rem;
+}
+
+.text p{
+    color: grey;
+    margin-bottom: 2%;
+    margin-top: 1%;
+    font-size: 1.2rem;
+    
+}
+
+.text ul li{
+    color: grey;
+    padding: 1%;
+    margin-bottom: 1%;
+
+    
+}
+
+
+
+.Strtbtn{
+    background-color: #FF8D28 ;
+    border: none;
+    color: white;
+    padding: 2%;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    display: none;
+}
+
+.locked{
+    background-color: #979797 ;
+    border: none;
+    color: white;
+    padding: 2%;
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+
+.revbtn{
+    background-color: #979797 ;
+    border: none;
+    color: white;
+    padding: 2%;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    display: none;
+}
+#output{
+    max-width: 80%;
+}
+
+.revbtn:hover{
+    background-color: #8e8e8e;
+}
+
+.Dnbutton{
+    background-color: #18a02c ;
+    border: none;
+    color: white;
+    padding: 2%;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    display: none;
+}
+
+
+
+
+.Strtbtn:hover{
+    background-color: #d87b28 ;
+}
+
+.Dnbutton:hover{
+        background-color: #158626 ;
+}
+
+
+.logo{
+    margin: auto;
+    color: white;
+    text-align: center;
+}
+
+.logo h1{
+    font-size: 5rem;
+}
+
+.Cmplt{
+ color: #18a02c;
+ font-weight: 1000;
+ text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.177);
+ display: none;
+
+}
+
+.Onging{
+ font-weight: 1000;
+ color: #ff3628;
+ text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.177);
+ display: none;
+}
+
+@media (max-width: 425px) {
+    .Head {
+        padding: 2.5em 1em;
+    }
+
+    .Head h1 {
+        font-size: 2.5rem;
+    }
+
+    .Head p {
+        font-size: 1.2rem;
+    }
+
+    .group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .card {
+        width: 90%;
+        flex-direction: column;
+        background: white;
+        padding: 20px;
+        margin-bottom: 1em;
+    }
+
+    .logo {
+        margin-bottom: 1.5rem;
+    }
+
+    .logo h1 {
+        font-size: 3rem;
+        color: #FF8D28;
+    }
+
+    .text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .text h1 {
+        font-size: 1.5rem;
+    }
+
+    .text p, 
+    .text ul li {
+        font-size: 1rem;
+    }
+
+    .Strtbtn, 
+    .revbtn, 
+    .Dnbutton {
+        width: 100%;
+        padding: 15px;
+        margin-top: 10px;
+    }
+}

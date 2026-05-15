@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course1</title>
+
+            <title>code-input: Basic Prism.js Code Editor</title>
+        <!--For convenience, this demo uses files from JSDelivr CDN; for more privacy and security download and host them yourself.-->
+
+        <!--1. Import highlighter-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.30/themes/prism.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/components/prism-core.min.js" data-manual></script><!--Remove data-manual if also using Prism normally-->
+        <script src="https://cdn.jsdelivr.net/npm/prismjs@1.30/plugins/autoloader/prism-autoloader.min.js"></script>
+        <!--2. Import code-input-js-->
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/code-input.min.css">
+        <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.8/plugins/indent.min.js"></script>
+        <!--3. Join code-input-js to highlighter-->
+        <script>codeInput.registerTemplate("syntax-highlighted", new codeInput.templates.Prism(Prism, [new codeInput.plugins.Indent()]));</script>
+        <link rel="stylesheet" href="Course1.css">
+</head>
+
+<header>
+    <a href="Courses.htm">⬅ Back to Courses</a>
+    <h1>Course1: Javascript Fundamentals</h1>
+    <p>Lesson 4 of 4</p>
+</header>
+
+    <body>
+
+<div class="Info">
+    <h1>Introduction to functions</h1>
+    <p>Learn how to make and use functions</p>
+</div>
+
+
+
+
+<div class="Learnings">
+    <h1>What you will learn</h1>
+    <p>In this section you will learn the basics about javascript functions, you will then be able to use the functions in your own code. This video will explain for functions in more detail</p>
+   
+
+
+  <iframe width="600" height="315"
+    src="https://www.youtube.com/embed/FOD408a0EzU"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+
+  </div>
+ </div>
+ 
+</div>
+
+        <!--4. Use the code-input element-->
+
+        <h1>Put what you learnt to use!</h1>
+        <p>Try changing the variable to see how it affects your if else condition</p>
+        <code-input language="JavaScript"><textarea data-code-input-fallback id="Userinput">
+function greet(name) {
+    console.log("Hello " + name + "! Welcome to JavaScript functions.");
+}
+
+// Call the function
+greet("Student");
+
+// try changing Student to your name to see what happens
+        </textarea></code-input>
+
+<div class="button">
+<button onclick="runCode()">Run Code</button>
+<button id="Nxt"><a href="Courses.htm" >Complete Course</a></button>
+<button ><a href="Course1(3).htm" >Last page</a></button>
+</div>
+<p>Console output</p>
+<pre id="output"></pre>
+
+<p id="Feedback"></p>
+
+</body>
+    <script src="Codeeditor.js"></script>
+
+    <script>
+function checkAnswer(output) {
+    const feedback = document.getElementById("Feedback");
+    const cleanOutput = output.trim().toLowerCase();
+    const nextbutton = document.getElementById("Nxt");
+    const correctanswer = "hello student! welcome to javascript functions.";
+
+if (cleanOutput === correctanswer){
+        feedback.innerHTML = "Try changing the STUDENT to make the code more personal";
+        feedback.style.color = "#FF8D28";
+        feedback.style.fontWeight = "800";
+    } else {
+        feedback.innerHTML = "Good job!";
+        feedback.style.color = "green";
+        feedback.style.fontWeight = "800";
+        nextbutton.style.display = "flex"
+    }
+}
+    </script>
+</html>
